@@ -1,0 +1,41 @@
+﻿@model Pat.Domain.Models.Student
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EnrollmentDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstMidName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                @Html.DisplayFor(model => model.EnrollmentDate)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.FirstMidName)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.LastName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@Model.StudentID">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@Model.StudentID">Delete</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
