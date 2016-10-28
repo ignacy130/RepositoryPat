@@ -9,9 +9,9 @@ namespace RepositoryPat.DAL
     public interface IStudentRepository : IDisposable
     {
         IEnumerable<Student> GetStudents();
-        Student GetStudentByID(int studentId);
+        Student GetStudentByID(int id);
         void InsertStudent(Student student);
-        void DeleteStudent(int studentID);
+        void DeleteStudent(int id);
         void UpdateStudent(Student student);
         void Save();
     }

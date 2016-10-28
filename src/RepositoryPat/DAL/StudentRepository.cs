@@ -24,7 +24,7 @@ namespace RepositoryPat.DAL
 
         public Student GetStudentByID(int id)
         {
-            return context.Students.Single(x=>x.StudentID == id);
+            return context.Students.Single(x=>x.Id == id);
         }
 
         public void InsertStudent(Student student)
@@ -32,9 +32,9 @@ namespace RepositoryPat.DAL
             context.Students.Add(student);
         }
 
-        public void DeleteStudent(int studentID)
+        public void DeleteStudent(int Id)
         {
-            Student student = context.Students.Single(x => x.StudentID == studentID);
+            Student student = context.Students.Single(x => x.Id == Id);
             context.Students.Remove(student);
         }
 

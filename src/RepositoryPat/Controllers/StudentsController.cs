@@ -73,7 +73,7 @@ namespace RepositoryPat.Controllers
 
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind("StudentID, LastName, FirstMidName, EnrollmentDate")]
+        public ActionResult Edit([Bind("Id, LastName, FirstMidName, EnrollmentDate")]
          Student student)
         {
             try
