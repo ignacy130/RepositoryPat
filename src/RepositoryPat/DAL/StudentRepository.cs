@@ -1,0 +1,71 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Pat.Domain.DAL;
+using Pat.Domain.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace RepositoryPat.DAL
+{
+    public class StudentRepository : IStudentRepository, IDisposable
+    {
+        private SchoolContext context;
+
+        public StudentRepository(SchoolContext context)
+        {
+            this.context = context;
+        }
+
+        public IEnumerable<Student> GetStudents()
+        {
+            return context.Students.ToList();
+        }
+
+        public Student GetStudentByID(int id)
+        {
+            return context.Students.Single(x=>x.StudentID == id);
+        }
+
+        public void InsertStudent(Student student)
+        {
+            context.Students.Add(student);
+        }
+
+        public void DeleteStudent(int studentID)
+        {
+            Student student = context.Students.Single(x => x.StudentID == studentID);
+            context.Students.Remove(student);
+        }
+
+        public void UpdateStudent(Student student)
+        {
+            context.Entry(student).State = EntityState.Modified;
+        }
+
+        public void Save()
+        {
+            context.SaveChanges();
+        }
+
+        private bool disposed = false;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    context.Dispose();
+                }
+            }
+            this.disposed = true;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+    }
+}

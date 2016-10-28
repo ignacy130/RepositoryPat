@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Pat.Domain.DAL;
 using Microsoft.EntityFrameworkCore;
 using Pat.Domain.Models;
+using RepositoryPat.DAL;
 
 namespace RepositoryPat
 {
@@ -42,6 +43,8 @@ namespace RepositoryPat
             services.AddMvc();
 
             services.AddDbContext<SchoolContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddTransient<IStudentRepository, StudentRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
