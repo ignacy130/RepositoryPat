@@ -66,8 +66,7 @@ namespace RepositoryPat.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind("Id,Title,Credits,DepartmentID")]
-         Course course)
+        public ActionResult Edit([Bind("Id,Title,Credits,DepartmentID")] Course course)
         {
             try
             {
