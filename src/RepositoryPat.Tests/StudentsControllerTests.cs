@@ -48,44 +48,28 @@ namespace RepositoryPat.Tests
             return students;
         }
 
-        //[Fact]
-        //public void IndexPost_ReturnsBadRequestResult_WhenModelStateIsInvalid()
-        //{
-        //    // Arrange
-        //    var mockRepo = new Mock<IStudentRepository>();
-        //    mockRepo.Setup(repo => repo.GetStudents());
-        //    var controller = new StudentsController(mockRepo.Object);
-        //    controller.ModelState.AddModelError("SessionName", "Required");
-        //    var newSession = new StudentsController.NewSessionModel();
+        [Fact]
+        public void StudentEditPost_ReturnsBadRequestResult_WhenModelStateIsInvalid()
+        {
+            // Arrange
+            var mockRepo = new Mock<IStudentRepository>();
+            mockRepo.Setup(repo => repo.GetStudentsAsync()).Returns(Task.FromResult(GetTestStudents()));
+            var controller = new StudentsController(mockRepo.Object);
+            controller.ModelState.AddModelError("FirstMidName", "Required");
+            var editedStudent = new Student()
+            {
+                FirstMidName = null,
+                LastName = "Kowalski",
+                EnrollmentDate = DateTime.Now.AddDays(-7),
+                Id = 100,
+            };
 
-        //    // Act
-        //    var result = controller.Index(newSession);
+            // Act
+            var result = controller.Edit(editedStudent);
 
-        //    // Assert
-        //    var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
-        //    Assert.IsType<SerializableError>(badRequestResult.Value);
-        //}
-
-        //[Fact]
-        //public async Task IndexPost_ReturnsARedirectAndAddsSession_WhenModelStateIsValid()
-        //{
-        //    // Arrange
-        //    var mockRepo = new Mock<IStudentRepository>();
-        //    mockRepo.Setup(repo => repo.InsertStudent(It.IsAny<Student>())).Verifiable();
-        //    var controller = new StudentsController(mockRepo.Object);
-        //    var newSession = new StudentsController.NewSessionModel()
-        //    {
-        //        SessionName = "Test Name"
-        //    };
-
-        //    // Act
-        //    var result = await controller.Index(newSession);
-
-        //    // Assert
-        //    var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
-        //    Assert.Null(redirectToActionResult.ControllerName);
-        //    Assert.Equal("Index", redirectToActionResult.ActionName);
-        //    mockRepo.Verify();
-        //}
+            // Assert
+            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
+            Assert.IsType<SerializableError>(badRequestResult.Value);
+        }
     }
 }
