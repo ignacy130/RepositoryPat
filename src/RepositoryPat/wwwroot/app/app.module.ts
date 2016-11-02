@@ -10,11 +10,16 @@ import { StudentService } from './student.service';
     imports: [
         BrowserModule,
         FormsModule,
-        HttpModule],
-    declarations: [AppComponent],
+        HttpModule
+    ],
+    declarations: [
+        AppComponent
+    ],
     providers: [
         StudentService,
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [
+        AppComponent
+    ]
 })
 export class AppModule { }
