@@ -14,13 +14,13 @@ namespace RepositoryPat.Tests
     public class StudentsControllerTests
     {
         [Fact]
-        public void Index_ReturnsAViewResult_WithAListOfBrainstormSessions()
+        public async Task Index_ReturnsAViewResult_WithAListOfBrainstormSessions()
         {
             // Arrange
             var mockRepo = new Mock<IStudentRepository>();
-            mockRepo.Setup(repo => repo.GetStudents());
+            mockRepo.Setup(repo => repo.GetStudentsAsync()).Returns(Task.FromResult(GetTestStudents()));
             var controller = new StudentsController(mockRepo.Object);
-
+            
             // Act
             var result = controller.Index();
 
@@ -30,22 +30,22 @@ namespace RepositoryPat.Tests
             Assert.Equal(2, model.Count());
         }
 
-        private List<Student> GetTestSessions()
+        private IEnumerable<Student> GetTestStudents()
         {
-            var sessions = new List<Student>();
-            sessions.Add(new Student()
+            var students = new List<Student>();
+            students.Add(new Student()
             {
                 EnrollmentDate = new DateTime(2016, 7, 2),
                 Id = 1,
                 FirstMidName = "Test One"
             });
-            sessions.Add(new Student()
+            students.Add(new Student()
             {
                 EnrollmentDate = new DateTime(2016, 7, 1),
                 Id = 2,
                 FirstMidName = "Test Two"
             });
-            return sessions;
+            return students;
         }
 
         //[Fact]
