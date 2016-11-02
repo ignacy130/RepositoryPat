@@ -250,3 +250,15 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
+
+#JS
+*js.map
+src/RepositoryPat/wwwroot/js/system.js
+src/RepositoryPat/wwwroot/js/zone.js
+src/RepositoryPat/typings/
+src/RepositoryPat/wwwroot/app/app.component.js
+src/RepositoryPat/wwwroot/app/app.module.js
+src/RepositoryPat/wwwroot/app/student.service.js
+src/RepositoryPat/wwwroot/app/main.js
+src/RepositoryPat/wwwroot/js/
+src/RepositoryPat/wwwroot/app/bundle.js
