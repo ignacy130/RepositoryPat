@@ -5,11 +5,12 @@ import { Student } from './student';
     selector: 'student-detail',
     template: `
       <div *ngIf="student">
-        <h2>{{student.firstName}} details!</h2>
+        <h2>{{student.firstMidName}} details!</h2>
         <div><label>id: </label>{{student.id}}</div>
         <div>
           <label>name: </label>
-          <input [(ngModel)]="student.firstName" placeholder="firstName"/>
+          <input [(ngModel)]="student.firstMidName" placeholder="firstName"/>
+          <input [(ngModel)]="student.lastName" placeholder="lastName"/>
         </div>
       </div>
     `
