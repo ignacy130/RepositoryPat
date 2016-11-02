@@ -7,11 +7,13 @@ using Pat.Domain.DAL;
 using Microsoft.EntityFrameworkCore;
 using Pat.Domain.Models;
 using RepositoryPat.DAL;
+using System.Net.Http;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace RepositoryPat.APIControllers
 {
+    [Route("api/[controller]")]
     public class StudentsController : Controller
     {
         private IStudentRepository studentRepository;
@@ -21,13 +23,13 @@ namespace RepositoryPat.APIControllers
             this.studentRepository = studentRepository;
         }
 
-        [Route("api/students")]
-        // GET: /<controller>/
+        [HttpGet]
         public async Task<IEnumerable<Student>> Index()
         {
             return await studentRepository.GetStudentsAsync();
         }
 
+        [HttpGet("{id}")]
         public async Task<Student> Details(int id)
         {
             var student = await studentRepository.GetStudentByIdAsync(id);
@@ -40,41 +42,32 @@ namespace RepositoryPat.APIControllers
             return student;
         }
 
-        public IActionResult Create()
-        {
-            return View();
-        }
-
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("EnrollmentDate,FirstMidName,LastName")] Student student)
         {
             try
             {
-                if (ModelState.IsValid)
+                if (student == null)
+                {
+                    return BadRequest();
+                }
+                else
                 {
                     studentRepository.InsertStudent(student);
                     studentRepository.Save();
-                    return RedirectToAction("Index");
+                    return CreatedAtRoute("GetTodo", new { id = student.Id }, student);
                 }
             }
             catch (DbUpdateException /* ex */)
             {
                 //Log the error (uncomment ex variable name and write a log.
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+                return StatusCode(500, "Unable to save changes.");
             }
-            return View(student);
         }
 
-        public async Task<IActionResult> Edit(int id)
-        {
-            var studentToUpdate = await studentRepository.GetStudentByIdAsync(id);
-            return View(studentToUpdate);
-        }
-
-        [HttpPost, ActionName("Edit")]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind("Id, LastName, FirstMidName, EnrollmentDate")] Student student)
+        [HttpPatch]
+        public IActionResult Edit([Bind("Id, LastName, FirstMidName, EnrollmentDate")] Student student)
         {
             try
             {
@@ -93,7 +86,8 @@ namespace RepositoryPat.APIControllers
             return View(student);
         }
 
-        public IActionResult Delete(int id = 0, bool? saveChangesError = false)
+        [HttpDelete]
+        public IActionResult Delete(int id)
         {
             var student = studentRepository.GetStudentByIdAsync(id);
             if (student == null)
@@ -101,36 +95,16 @@ namespace RepositoryPat.APIControllers
                 return NotFound();
             }
 
-            if (saveChangesError.GetValueOrDefault())
-            {
-                ViewData["ErrorMessage"] =
-                    "Delete failed. Try again, and if the problem persists " +
-                    "see your system administrator.";
-            }
-
-            return View(student);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
-        {
-            var student = studentRepository.GetStudentByIdAsync(id);
-            if (student == null)
-            {
-                return RedirectToAction("Index");
-            }
-
             try
             {
                 studentRepository.DeleteStudent(id);
                 studentRepository.Save();
-                return RedirectToAction("Index");
+                return new NoContentResult();
             }
             catch (DbUpdateException /* ex */)
             {
                 //Log the error (uncomment ex variable name and write a log.)
-                return RedirectToAction("Delete", new { id = id, saveChangesError = true });
+                return StatusCode(500, $"Unable to delete student with id = {id}.");
             }
         }
     }
