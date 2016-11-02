@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { StudentService } from './student.service';
+import { StudentDetailComponent } from './student-detail.component';
 
 @NgModule({
     imports: [
@@ -13,7 +14,8 @@ import { StudentService } from './student.service';
         HttpModule
     ],
     declarations: [
-        AppComponent
+        AppComponent,
+        StudentDetailComponent
     ],
     providers: [
         StudentService,
