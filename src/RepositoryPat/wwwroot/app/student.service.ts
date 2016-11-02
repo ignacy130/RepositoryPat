@@ -39,8 +39,10 @@ export class StudentService {
         return Promise.reject(errMsg);
     }
 }
+
 export interface Student {
     lastName: string;
     firstMidName: string;
     enrollmentDate: Date;
+    id: Number;
 }
