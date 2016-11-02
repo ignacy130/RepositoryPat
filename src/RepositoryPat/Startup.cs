@@ -11,6 +11,7 @@ using Pat.Domain.DAL;
 using Microsoft.EntityFrameworkCore;
 using Pat.Domain.Models;
 using RepositoryPat.DAL;
+using System.IO;
 
 namespace RepositoryPat
 {
@@ -66,6 +67,18 @@ namespace RepositoryPat
             }
 
             app.UseApplicationInsightsExceptionTelemetry();
+
+            app.Use(async (ctx, next) =>
+            {
+                await next();
+
+                if (ctx.Response.StatusCode == 404
+                    && !Path.HasExtension(ctx.Request.Path.Value))
+                {
+                    ctx.Request.Path = "/index.html";
+                    await next();
+                }
+            });
 
             app.UseStaticFiles();
 
