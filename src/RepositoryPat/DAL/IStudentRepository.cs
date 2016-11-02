@@ -8,8 +8,8 @@ namespace RepositoryPat.DAL
 {
     public interface IStudentRepository : IDisposable
     {
-        IEnumerable<Student> GetStudents();
-        Student GetStudentByID(int id);
+        Task<IEnumerable<Student>> GetStudentsAsync();
+        Task<Student> GetStudentByIdAsync(int id);
         void InsertStudent(Student student);
         void DeleteStudent(int id);
         void UpdateStudent(Student student);

@@ -22,14 +22,14 @@ namespace RepositoryPat.Controllers
         }
 
         // GET: /<controller>/
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(studentRepository.GetStudents());
+            return View(await studentRepository.GetStudentsAsync());
         }
 
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
-            var student = studentRepository.GetStudentByID(id);
+            var student = await studentRepository.GetStudentByIdAsync(id);
 
             if (student == null)
             {
@@ -65,9 +65,9 @@ namespace RepositoryPat.Controllers
             return View(student);
         }
 
-        public IActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
-            var studentToUpdate = studentRepository.GetStudentByID(id);
+            var studentToUpdate = await studentRepository.GetStudentByIdAsync(id);
             return View(studentToUpdate);
         }
 
@@ -94,7 +94,7 @@ namespace RepositoryPat.Controllers
 
         public IActionResult Delete(int id = 0, bool? saveChangesError = false)
         {
-            var student = studentRepository.GetStudentByID(id);
+            var student = studentRepository.GetStudentByIdAsync(id);
             if (student == null)
             {
                 return NotFound();
@@ -114,7 +114,7 @@ namespace RepositoryPat.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-            var student = studentRepository.GetStudentByID(id);
+            var student = studentRepository.GetStudentByIdAsync(id);
             if (student == null)
             {
                 return RedirectToAction("Index");

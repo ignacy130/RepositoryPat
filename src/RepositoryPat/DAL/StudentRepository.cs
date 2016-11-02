@@ -17,14 +17,14 @@ namespace RepositoryPat.DAL
             this.context = context;
         }
 
-        public IEnumerable<Student> GetStudents()
+        public async Task<IEnumerable<Student>> GetStudentsAsync()
         {
-            return context.Students.ToList();
+            return await context.Students.ToListAsync();
         }
 
-        public Student GetStudentByID(int id)
+        public async Task<Student> GetStudentByIdAsync(int id)
         {
-            return context.Students.Single(x=>x.Id == id);
+            return await context.Students.SingleAsync(x=>x.Id == id);
         }
 
         public void InsertStudent(Student student)
