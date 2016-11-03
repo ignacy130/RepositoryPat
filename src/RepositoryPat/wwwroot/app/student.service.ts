@@ -8,7 +8,7 @@ import 'rxjs/add/operator/toPromise';
 export class StudentService {
     constructor(private _http: Http) { }
 
-    loadData(): Promise<Student[]> {
+    getStudents(): Promise<Student[]> {
         return this._http.get('/api/students')
             .toPromise()
             .then(response => this.extractArray(response))

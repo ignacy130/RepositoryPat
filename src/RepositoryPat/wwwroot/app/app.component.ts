@@ -29,7 +29,7 @@ export class AppComponent extends OnInit {
     }
 
     ngOnInit() {
-        this._service.loadData().then(data => {
+        this._service.getStudents().then(data => {
             this.students = data;
         })
     }

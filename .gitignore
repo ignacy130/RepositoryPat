@@ -264,3 +264,4 @@ src/RepositoryPat/wwwroot/js/
 src/RepositoryPat/wwwroot/app/bundle.js
 src/RepositoryPat/wwwroot/_references.js
 src/RepositoryPat/wwwroot/app/student-detail.component.js
+src/RepositoryPat/wwwroot/app/student.js
