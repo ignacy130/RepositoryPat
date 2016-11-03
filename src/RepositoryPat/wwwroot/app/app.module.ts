@@ -28,7 +28,11 @@ import { StudentDetailComponent } from './student-detail.component';
             {
                 path: 'students',
                 component: StudentsComponent
-            }
+            },
+            {
+                path: 'detail/:id',
+                component: StudentDetailComponent
+            },
         ])
     ],
     declarations: [

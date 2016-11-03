@@ -15,6 +15,12 @@ export class StudentService {
             .catch(this.handleErrorPromise);
     }
 
+    getStudent(id: number): Promise<Student> {
+        return this._http.get('/api/students/' + id)
+            .toPromise()
+            .then(response => response.json());
+    }
+
     protected extractArray(res: Response, showprogress: boolean = true) {
         let data = res.json();
         return data || [];
