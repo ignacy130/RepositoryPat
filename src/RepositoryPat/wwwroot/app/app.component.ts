@@ -4,10 +4,11 @@
     selector: 'app',
     template: `
     <h1>{{title}}</h1>
-    <students>Loading...</students>
+    <a routerLink="/students">Students</a>
+    <router-outlet></router-outlet>
     `
 })
 
 export class AppComponent {
-    title = 'Tour of Heroes';
+    title = 'Contoso University';
 }
