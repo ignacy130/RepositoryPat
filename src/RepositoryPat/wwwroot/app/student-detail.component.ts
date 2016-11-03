@@ -4,7 +4,8 @@ import { Student } from './student';
 @Component({
     selector: 'student-detail',
     template: `
-      <div *ngIf="student">
+    <div id="student-selected">
+      <div *ngIf="student" >
         <h2>{{student.firstMidName}} details!</h2>
         <div><label>id: </label>{{student.id}}</div>
         <div>
@@ -13,6 +14,7 @@ import { Student } from './student';
           <input [(ngModel)]="student.lastName" placeholder="lastName"/>
         </div>
       </div>
+    </div>
     `
 })
 
