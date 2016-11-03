@@ -6,15 +6,9 @@ import { RouterModule }   from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { StudentsComponent } from './students.component';
+import { DashboardComponent } from './dashboard.component';
 import { StudentService } from './student.service';
 import { StudentDetailComponent } from './student-detail.component';
-
-RouterModule.forRoot([
-    {
-        path: 'students',
-        component: StudentsComponent
-    }
-])
 
 @NgModule({
     imports: [
@@ -23,6 +17,15 @@ RouterModule.forRoot([
         HttpModule,
         RouterModule.forRoot([
             {
+                path: '',
+                redirectTo: '/dashboard',
+                pathMatch: 'full'
+            },
+            {
+                path: 'dashboard',
+                component: DashboardComponent
+            },
+            {
                 path: 'students',
                 component: StudentsComponent
             }
@@ -30,6 +33,7 @@ RouterModule.forRoot([
     ],
     declarations: [
         AppComponent,
+        DashboardComponent,
         StudentDetailComponent,
         StudentsComponent,
     ],

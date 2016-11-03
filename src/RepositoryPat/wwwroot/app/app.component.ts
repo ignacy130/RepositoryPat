@@ -4,7 +4,10 @@
     selector: 'app',
     template: `
     <h1>{{title}}</h1>
-    <a routerLink="/students">Students</a>
+        <nav>
+            <a routerLink="/dashboard">Dashboard</a>
+            <a routerLink="/students">Students</a>
+        </nav>
     <router-outlet></router-outlet>
     `
 })
