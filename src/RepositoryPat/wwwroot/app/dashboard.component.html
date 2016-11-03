@@ -1,0 +1,8 @@
+﻿<h3>Top Heroes</h3>
+<div class="grid grid-pad">
+    <div *ngFor="let student of students" (click)="gotoDetail(student)" class="col-1-4">
+        <div class="module student">
+            <h4>{{student.firstMidName}}</h4>
+        </div>
+    </div>
+</div>
