@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
+import { StudentsComponent } from './students.component';
 import { StudentService } from './student.service';
 import { StudentDetailComponent } from './student-detail.component';
 
@@ -15,10 +16,11 @@ import { StudentDetailComponent } from './student-detail.component';
     ],
     declarations: [
         AppComponent,
-        StudentDetailComponent
+        StudentDetailComponent,
+        StudentsComponent,
     ],
     providers: [
-        StudentService,
+        StudentService
     ],
     bootstrap: [
         AppComponent
